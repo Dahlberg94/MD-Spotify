@@ -1,5 +1,6 @@
 import { Box, Divider, Grid } from '@mui/material';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import SongRow from '../SongRow/SongRow';
 
 const SongTable = ({}) => {
 	return (
@@ -21,6 +22,9 @@ const SongTable = ({}) => {
             <Box pb={2}>
                 <Divider sx={{width: '100%', height: 1}} />
             </Box>
+			<SongRow />
+			<SongRow />
+			<SongRow />
 		</Box>
 	);
 };
