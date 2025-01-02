@@ -12,7 +12,6 @@ const Playlist = ({ spotifyApi, token }) => {
 	const formatSongs = useCallback(
 		(items) =>
 			items.map((item, i) => {
-				console.log({ item, i });
 				const { track } = item;
 				track.contextUri = `spotify:playlist:${id}`;
 				track.position = i;
@@ -30,12 +29,10 @@ const Playlist = ({ spotifyApi, token }) => {
 					image: playlistDetails.body.images[0].url,
 					name: playlistDetails.body.name
 				});
-				console.log(playlistDetails);
 				const { items } = playlistDetails.body.tracks;
 
 				const formattedSongs = formatSongs(items);
 				setSongs(formattedSongs);
-				console.log(items);
 			} catch (e) {
 				console.error(e);
 				setStatus({ isLoading: false, isError: e });
@@ -86,7 +83,7 @@ const Playlist = ({ spotifyApi, token }) => {
 					)}
 				</Box>
 			</Box>
-            <SongTable />
+            <SongTable songs={songs} loading={status.isLoading} spotifyApi={spotifyApi} />
 		</Box>
 	);
 };
