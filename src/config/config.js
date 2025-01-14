@@ -3,6 +3,7 @@ export const clientId = import.meta.env.VITE_CLIENT_ID;
 export const liveURL = import.meta.env.VITE_LIVE_URL;
 export const devURL = "http://localhost:5173/";
 export const redirectURL = import.meta.env.PROD === 'production' ? liveURL : devURL;
+console.log({redirectURL, liveURL});
 export const scopes = [
     'playlist-read-collaborative',
     'playlist-modify-public',
