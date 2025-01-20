@@ -8,15 +8,46 @@ const SideNav = ({ spotifyApi, token }) => {
 	const [albumList, setAlbumList] = useState(null);
 	const [loading, setLoading] = useState(true);
 
+	// useEffect(() => {
+	// 	async function getPlaylists() {
+	// 		if (!spotifyApi) return;
+	// 		const data = await spotifyApi.getUserPlaylists();
+	// 		console.log(data);   //felsökning
+	// 		setLoading(false);
+	// 		setAlbumList(data.body.items);
+	// 	}
+	// 	getPlaylists();
+	// }, [spotifyApi, token]);
+
 	useEffect(() => {
 		async function getPlaylists() {
-			if (!spotifyApi) return;
+		  if (!spotifyApi) {
+			console.error("Spotify API är inte definierat.");
+			return;
+		  }
+	  
+		  if (!token) {
+			console.error("Ingen token hittades. Kontrollera autentiseringen.");
+			return;
+		  }
+	  
+		  // Sätt token till Spotify API
+		  spotifyApi.setAccessToken(token);
+	  
+		  try {
 			const data = await spotifyApi.getUserPlaylists();
-			setLoading(false);
+			console.log("Playlists data:", data); // Logga API-svaret
 			setAlbumList(data.body.items);
+			setLoading(false);
+		  } catch (error) {
+			console.error("Error fetching playlists:", error); // Logga eventuella fel
+			setLoading(false);
+		  }
 		}
 		getPlaylists();
-	}, [spotifyApi, token]);
+	  }, [spotifyApi, token]);
+	  
+
 
 	const renderPlaylist = () => {
 		if (loading) {
