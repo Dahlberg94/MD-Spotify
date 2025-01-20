@@ -10,21 +10,11 @@ const SideNav = ({ spotifyApi, token }) => {
 
 	useEffect(() => {
 		async function getPlaylists() {
-			if (!spotifyApi || !token) return;
-	
-			
-			spotifyApi.setAccessToken(token);
-	
-			try {
-				const data = await spotifyApi.getUserPlaylists();
-				setAlbumList(data.body.items); 
-			} catch (error) {
-				console.error('Error fetching playlists:', error);
-			} finally {
-				setLoading(false);
-			}
+			if (!spotifyApi) return;
+			const data = await spotifyApi.getUserPlaylists();
+			setLoading(false);
+			setAlbumList(data.body.items);
 		}
-	
 		getPlaylists();
 	}, [spotifyApi, token]);
 
