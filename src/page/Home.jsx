@@ -10,7 +10,7 @@ const Home = () => {
         flexDirection: 'column',
         gap: 5
     }}>
-        <img src="/Marcus-Lila.png" alt="" style={{maxWidth:'50%', maxHeight: '50%'}} />
+        <img src="/Spotify_Logo.png" alt="" style={{maxWidth:'50%', maxHeight: '50%'}} />
         <Button size='large' variant='contained' href="https://marcus-dahlberg.vercel.app/" > Min Portfolio </Button>
     </Box>
     );
