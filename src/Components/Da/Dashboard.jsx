@@ -12,9 +12,11 @@ import Library from '../../page/Library';
 
 const Dashboard = ({ spotifyApi }) => {
 	const [token, setToken] = useState(getAccessTokenFromStorage());
+    const [loading, setLoading] = useState(true)
 	useEffect(() => {
 		const onMount = async () => {
 			await spotifyApi.setAccessToken(token);
+            setLoading(false);
 		};
 		if (token) {
 			onMount();
@@ -22,8 +24,12 @@ const Dashboard = ({ spotifyApi }) => {
 	}, []);
 
 
+    
+
     return (
         <Box sx={{ width: '100%', height: '100%', display: 'flex', flexDirection:'column' }}>
+           {token && !loading &&
+           <>
             <Box sx={{ flex: 1, overflowY: 'auto', display: 'flex'}}>
                 <SideNav spotifyApi={spotifyApi} token={null} />
                 <Routes>
@@ -34,6 +40,8 @@ const Dashboard = ({ spotifyApi }) => {
             </Box>
             {token && <Player spotifyApi={spotifyApi} token={token} />}
             <MobileNav />
+           </>
+           }
         </Box>
     )
 };
